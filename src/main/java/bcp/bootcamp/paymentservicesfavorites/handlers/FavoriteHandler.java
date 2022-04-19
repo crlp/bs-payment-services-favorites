@@ -18,7 +18,7 @@ public class FavoriteHandler {
     private FavoriteService subscriberService;
 
     public Mono<ServerResponse> findById(ServerRequest serverRequest){
-        String id = serverRequest.pathVariable("id").toLowerCase();
+        String id = serverRequest.pathVariable("id").toUpperCase();
         return this.subscriberService.findById(id)
                 .switchIfEmpty(Mono.error(new FavoriteBaseException("No se encontró elementos")))
                 .collectList()
